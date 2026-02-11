@@ -1,0 +1,6 @@
+# Default configuration for rubocop-buildout-rails
+
+Buildout/Rails/WithOptionsConditionOverwrite:
+  Description: 'Check for conditional keys inside with_options that overwrite outer conditionals'
+  Enabled: true
+  VersionAdded: '0.1.0'
