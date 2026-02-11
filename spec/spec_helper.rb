@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rubocop/buildout/rails"
+require "rubocop-buildout-rails"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
