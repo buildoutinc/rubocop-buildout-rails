@@ -4,3 +4,8 @@ Buildout/Rails/WithOptionsConditionOverwrite:
   Description: 'Check for conditional keys inside with_options that overwrite outer conditionals'
   Enabled: true
   VersionAdded: '0.1.0'
+
+Buildout/Rails/TravelToNestedStub:
+  Description: 'Check for an allow/expect stub on Date.today, Time.now, or DateTime.now inside travel_to/travel/freeze_time'
+  Enabled: true
+  VersionAdded: '0.2.0'

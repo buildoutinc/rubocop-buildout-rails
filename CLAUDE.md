@@ -143,6 +143,11 @@ Checks for conditional keys (`if`/`unless`) inside `with_options` blocks that ov
 
 **Location:** [lib/rubocop/cop/buildout/rails/with_options_condition_overwrite.rb](lib/rubocop/cop/buildout/rails/with_options_condition_overwrite.rb)
 
+### Buildout/Rails/TravelToNestedStub
+Checks for an `allow`/`expect` stub on `Date.today`, `Time.now`, or `DateTime.now` nested inside a `travel_to`, `travel`, or `freeze_time` block. Those helpers already stub the same three methods; RSpec's teardown restores the method to the travel helper's own stub instead of the true original, corrupting it for every later spec in the same process.
+
+**Location:** [lib/rubocop/cop/buildout/rails/travel_to_nested_stub.rb](lib/rubocop/cop/buildout/rails/travel_to_nested_stub.rb)
+
 ## Important Notes
 
 - Always run tests before committing (`bundle exec rake` runs both specs and rubocop)

@@ -43,6 +43,25 @@ with_options if: :active? do
 end
 ```
 
+### Buildout/Rails/TravelToNestedStub
+
+This cop checks for an `allow`/`expect` stub on `Date.today`, `Time.now`, or `DateTime.now` set up
+inside a `travel_to`, `travel`, or `freeze_time` block. Those helpers already stub the same three
+methods; nesting an RSpec stub on top of them means RSpec's teardown restores the method to the
+travel helper's own stub instead of the true original, silently corrupting it for every later spec
+in the same process.
+
+```ruby
+# bad - RSpec's teardown leaves Date.today corrupted after this example
+travel_to(Time.zone.local(2026, 1, 1)) do
+  allow(Date).to receive(:today).and_return(Date.new(2026, 1, 2))
+  ...
+end
+
+# good - assign the value directly, no travel_to needed
+allow(Date).to receive(:today).and_return(Date.new(2026, 1, 2))
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
