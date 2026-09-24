@@ -112,6 +112,25 @@ RSpec.describe RuboCop::Cop::Buildout::Rails::YourCop do
 end
 ```
 
+## Verifying Minimum Dependency Versions
+
+When a cop relies on a feature added in a specific `rubocop`/`rubocop-ast` release (e.g. a node type
+like `:any_block`), don't write the version bound from memory or assumption. Bisect against real gem
+versions first:
+
+```bash
+gem fetch rubocop-ast -v X.Y.Z && gem unpack rubocop-ast-X.Y.Z.gem
+grep -rn "the_feature" rubocop-ast-X.Y.Z/lib
+```
+
+or pin the candidate version in the Gemfile and run the affected cop's spec against it directly. Test
+the version you're about to declare as the floor, and the release immediately before it, to confirm
+the cutoff is exactly where you think it is.
+
+`v0.2.1` (see `CHANGELOG.md`) originally required `rubocop-ast >= 1.49` for `:any_block` based on an
+unverified assumption; retesting later showed `:any_block` actually shipped in 1.38.0, four minor
+releases earlier. The constraint was corrected once bisected against real releases.
+
 ## Git Workflow
 
 - Main branch: `main`

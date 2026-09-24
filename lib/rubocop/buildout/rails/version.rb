@@ -3,7 +3,7 @@
 module RuboCop
   module Buildout
     module Rails
-      VERSION = "0.2.0"
+      VERSION = "0.2.1"
     end
   end
 end

@@ -7,6 +7,10 @@ and the release process.
 
 See [README.md](README.md) for the list of current cops and their usage.
 
+Before declaring a minimum `rubocop`/`rubocop-ast` version in the gemspec, bisect against real gem
+versions rather than assuming - see "Verifying Minimum Dependency Versions" in
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Privacy: no references to private repos/projects
 
 This gem is (or may become) publicly viewable. Do not reference any private repo or project by name
